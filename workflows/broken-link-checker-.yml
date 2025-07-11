@@ -1,0 +1,23 @@
+name: Broken Link Checker
+
+on:
+  push:
+  schedule:
+    - cron: '0 0 * * 0' # every Sunday at midnight
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run lychee on your website
+        uses: lycheeverse/lychee-action@v1.7.0
+        with:
+          args: >
+            --verbose
+            --exclude-mail
+            --no-progress
+            ./  # check all local files
